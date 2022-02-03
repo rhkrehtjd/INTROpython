@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>if문과 while문 재정리 | INTROpython</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="if문과 while문 재정리" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
+<meta property="og:description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
+<link rel="canonical" href="https://rhkrehtjd.github.io/INTROpython/2022/02/03/intro2.html" />
+<meta property="og:url" content="https://rhkrehtjd.github.io/INTROpython/2022/02/03/intro2.html" />
+<meta property="og:site_name" content="INTROpython" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-02-03T00:00:00-06:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="if문과 while문 재정리" />
+<script type="application/ld+json">
+{"url":"https://rhkrehtjd.github.io/INTROpython/2022/02/03/intro2.html","@type":"BlogPosting","headline":"if문과 while문 재정리","dateModified":"2022-02-03T00:00:00-06:00","datePublished":"2022-02-03T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://rhkrehtjd.github.io/INTROpython/2022/02/03/intro2.html"},"description":"An easy to use blogging platform with support for Jupyter Notebooks.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/INTROpython/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://rhkrehtjd.github.io/INTROpython/feed.xml" title="INTROpython" /><link rel="shortcut icon" type="image/x-icon" href="/INTROpython/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/INTROpython/">INTROpython</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/INTROpython/about/">About Me</a><a class="page-link" href="/INTROpython/search/">Search</a><a class="page-link" href="/INTROpython/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">if문과 while문 재정리</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-02-03T00:00:00-06:00" itemprop="datePublished">
+        Feb 3, 2022
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      8 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-justify-center">
+          <div class="px-2">
+
+    <a href="https://github.com/rhkrehtjd/INTROpython/tree/master/_notebooks/2022-02-03-intro2.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/INTROpython/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/rhkrehtjd/INTROpython/master?filepath=_notebooks%2F2022-02-03-intro2.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/INTROpython/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/rhkrehtjd/INTROpython/blob/master/_notebooks/2022-02-03-intro2.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/INTROpython/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+          <div class="px-2">
+  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Frhkrehtjd%2FINTROpython%2Fblob%2Fmaster%2F_notebooks%2F2022-02-03-intro2.ipynb" target="_blank">
+      <img class="notebook-badge-image" src="/INTROpython/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
+  </a>
+</div>
+
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2022-02-03-intro2.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>기본 원리 : 조건문을 테스트해서 참이면 if문 바로 다음 문장(if 블록)들을 수행하고, 조건문이 거짓이면 else문 다음 문장(else 블록)들을 수행하게 된다. 그러므로 else문은 if문 없이 독립적으로 사용할 수 없다. 참과 거짓을 판단하는 문장이라는 것에 유념하자. </li>
+<li>들여쓰기 할 때 : 탭으로 해도 되고 스페이스 바를 이용해도 된다. 둘 중 어느 것을 사용해야 되는지 논란이 있으나 단 하나 주의해야 할 것은 둘 다 사용해도 되지만 2가지를 혼용해서 쓰지 말자는 것이다 .공백으로 할거면 항상 공백으로 통일하고 탭으로 할 거면 항상 탭으로 통일해서 사용하자는 말이다. 탭이나 공백은 프로그램 소스에서 눈으로 보이는 것이 아니기 때문에 혼용해서 쓰면 오류의 원인이 될 수 있다.<ul>
+<li>요즘 파이썬 커뮤니티에서는 들여쓰기를 할 때 공백 4개를 사용하는 것을 권장한다고 한다. </li>
+</ul>
+</li>
+<li>: 콜론을 잊지 말자<ul>
+<li>if 조건문 뒤에는 반드시 콜론이 붙는다. 어떤 특별한 의미가 있다기보다는 파이썬의 문법구조이다. 앞으로 배울 while이나 for def class에도 역시 문장의 끝에 콜론이 항상 들어간다. 다른 언어에서는 if문은 {}기호로 감싸지만 파이썬에서는 들여쓰기로 해결한다는 점을 기억하자. </li>
+</ul>
+</li>
+<li>조건을 판단하기 위해 사용하는 연산자로 and(둘 다 참), or(둘 중 하나만 참이어도 참), not x(x가 거짓이면 참)</li>
+<li>파이썬은 다른 프로그래밍 언어에서 쉽게 볼 수 있는 재미있는 조건문을 제공한다. <ul>
+<li>x in [], x not in []</li>
+<li>x in (), x not in ()</li>
+<li>x in '', x not in ''</li>
+<li>이 자체가 if 조건문에서 조건문 위치의 참과 거짓을 판별하여 if블록을 수행할지 else 블록을 수행할지 결정하는 것이다. </li>
+</ul>
+</li>
+<li>가끔 조건문의 참,거짓에 따라 실행할 행동을 정의할 때 아무런 일도 하지 않도록 설정하고 싶을 떄가 있다. <ul>
+<li>"주머니에 돈이 있으면 가만히 있고 주머니에 돈이 없으면 카드를 꺼내라"<div class="highlight"><pre><span></span><span class="n">pocket</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;paper&#39;</span><span class="p">,</span> <span class="s1">&#39;money&#39;</span><span class="p">,</span> <span class="s1">&#39;cellphone&#39;</span><span class="p">]</span>
+<span class="k">if</span> <span class="s1">&#39;money&#39;</span> <span class="ow">in</span> <span class="n">pocket</span><span class="p">:</span>
+<span class="k">pass</span> 
+<span class="k">else</span><span class="p">:</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;카드를 꺼내라&quot;</span><span class="p">)</span>
+</pre></div>
+</li>
+</ul>
+</li>
+<li>해당 조건문에선 pass가 수행되어 아무 결괏값도 보여주지 않는 것이다.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>다양한 조건을 판단할 수 있도록 elif를 사용할 수 있다. <div class="highlight"><pre><span></span><span class="n">pocket</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;paper&#39;</span><span class="p">,</span> <span class="s1">&#39;handphone&#39;</span><span class="p">]</span>
+<span class="n">card</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">if</span> <span class="s1">&#39;money&#39;</span> <span class="ow">in</span> <span class="n">pocket</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;택시를 타고가라&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="k">if</span> <span class="n">card</span><span class="p">:</span>
+      <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;택시를 타고가라&quot;</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+      <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;걸어가라&quot;</span><span class="p">)</span>
+</pre></div>
+</li>
+<li>언뜻 보기에도 이해하기 어렵고 산만한 느낌이 든다. 이런 복잡함을 해결하기 위해 파이썬에서는 다중 조건 판단을 가능하게 하는 elif를 사용할 수 있다. </li>
+<li>동일한 조건문을 elif를 이용하여 간결히 표현해보자<div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">&lt;</span><span class="n">조건문</span><span class="o">&gt;</span><span class="p">:</span>
+  <span class="o">&lt;</span><span class="n">수행할</span> <span class="n">문장1</span><span class="o">&gt;</span> 
+  <span class="o">&lt;</span><span class="n">수행할</span> <span class="n">문장2</span><span class="o">&gt;</span>
+<span class="k">elif</span> <span class="o">&lt;</span><span class="n">조건문</span><span class="o">&gt;</span><span class="p">:</span>
+  <span class="o">&lt;</span><span class="n">수행할</span> <span class="n">문장1</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">수행할</span> <span class="n">문장2</span><span class="o">&gt;</span>
+<span class="k">elif</span> <span class="o">&lt;</span><span class="n">조건문</span><span class="o">&gt;</span><span class="p">:</span>
+  <span class="o">&lt;</span><span class="n">수행할</span> <span class="n">문장1</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">수행할</span> <span class="n">문장2</span><span class="o">&gt;</span>
+<span class="k">else</span><span class="p">:</span>
+ <span class="o">&lt;</span><span class="n">수행할</span> <span class="n">문장1</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">수행할</span> <span class="n">문장2</span><span class="o">&gt;</span>
+</pre></div>
+</li>
+<li>위에서 볼 수 있듯이 elif는 개수에 제한 없이 사용할 수 있다.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>if문을 한 줄로 작성해보자<div class="highlight"><pre><span></span><span class="k">if</span> <span class="s1">&#39;money&#39;</span> <span class="ow">in</span> <span class="n">pocket</span><span class="p">:</span>
+  <span class="k">pass</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;카드를 꺼내라&quot;</span><span class="p">)</span>
+</pre></div>
+</li>
+<li>이 문장을 간결하게 한 줄로 작성해보자<div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">money</span> <span class="ow">in</span> <span class="n">pocket</span><span class="p">:</span> <span class="k">pass</span>
+<span class="k">else</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;카드를 꺼내라&quot;</span><span class="p">)</span>
+</pre></div>
+</li>
+<li>이렇게 if문 다음 수행할 문장을 콜론 바로 뒤에 작성해도 된다. else문도 동일하다. </li>
+<li>굳이 다음줄로 넘겨서 수행할 문장을 작성하지 않아도 된다는 것이다. </li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>조건부 표현식을 살펴보자<div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+  <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;success&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;failure&quot;</span>
+</pre></div>
+</li>
+<li>위 코드는 score가 60 이상일 경우 message에 문자열 "succes"를, 아닐 경우에는 "failure"를 대입하는 코드이다. </li>
+<li>파이썬의 조건부 표현식을 이용하면 위 코드를 한 줄로 간결화할 수 있다.<div class="highlight"><pre><span></span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;success&quot;</span> <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span> <span class="k">else</span> <span class="s2">&quot;failure&quot;</span>
+</pre></div>
+</li>
+<li>list comprehension과 유사하게 생각해도 될 것 같다. 조건부 표현식은 가독성에 유리하고 한 줄로 작성할 수 있어 활용성이 좋다.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>while문<ul>
+<li>반복해서 문장을 수행해야 할 경우  while문을 사용한다. 그래서 while문을 반복문이라고도 부른다.</li>
+<li>while문의 기본 구조에 대해 알아보자<div class="highlight"><pre><span></span><span class="k">while</span> <span class="o">&lt;</span><span class="n">조건문</span> <span class="n">자리</span><span class="p">(</span><span class="kc">True</span> <span class="n">of</span> <span class="kc">False</span><span class="p">)</span><span class="o">&gt;</span><span class="p">:</span>
+<span class="o">&lt;</span><span class="n">수행할</span> <span class="n">문장1</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">수행할</span> <span class="n">문장2</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">수행할</span> <span class="n">문장3</span><span class="o">&gt;</span>
+</pre></div>
+</li>
+</ul>
+</li>
+<li>while문은 조건문이 <code>참인 동안</code>에 while문 아래의 문장이 반복해서 수행된다.</li>
+<li>10번 찍어 안 넘어가는 나무 없다라는 속담을 구현해보자</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">treeHit</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">treeHit</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="n">treeHit</span> <span class="o">=</span> <span class="n">treeHit</span> <span class="o">+</span><span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;나무를 </span><span class="si">%d</span><span class="s2">번 찍었습니다.&quot;</span> <span class="o">%</span> <span class="n">treeHit</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">treeHit</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;나무 넘어갑니다.&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>나무를 1번 찍었습니다.
+나무를 2번 찍었습니다.
+나무를 3번 찍었습니다.
+나무를 4번 찍었습니다.
+나무를 5번 찍었습니다.
+나무를 6번 찍었습니다.
+나무를 7번 찍었습니다.
+나무를 8번 찍었습니다.
+나무를 9번 찍었습니다.
+나무를 10번 찍었습니다.
+나무 넘어갑니다.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">treeHit</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">treeHit</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="n">treeHit</span> <span class="o">=</span> <span class="n">treeHit</span> <span class="o">+</span><span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;나무를 </span><span class="si">%d</span><span class="s2">번 찍었습니다.&quot;</span> <span class="o">%</span> <span class="n">treeHit</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">treeHit</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">break</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>나무를 1번 찍었습니다.
+나무를 2번 찍었습니다.
+나무를 3번 찍었습니다.
+나무를 4번 찍었습니다.
+나무를 5번 찍었습니다.
+나무를 6번 찍었습니다.
+나무를 7번 찍었습니다.
+나무를 8번 찍었습니다.
+나무를 9번 찍었습니다.
+나무를 10번 찍었습니다.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">treeHit</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">treeHit</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="n">treeHit</span> <span class="o">+=</span><span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;나무를 </span><span class="si">{}</span><span class="s2">번 찍었습니다.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">treeHit</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">treeHit</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">break</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>나무를 1번 찍었습니다.
+나무를 2번 찍었습니다.
+나무를 3번 찍었습니다.
+나무를 4번 찍었습니다.
+나무를 5번 찍었습니다.
+나무를 6번 찍었습니다.
+나무를 7번 찍었습니다.
+나무를 8번 찍었습니다.
+나무를 9번 찍었습니다.
+나무를 10번 찍었습니다.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>이렇게 treeHit이 10이면 break를 수행할 수도 혹은 또 다른 명령문을 수행할 수도 있겠다.</li>
+<li>위 예에서 while문의 조건문은 treeHit &lt; 10이다. 즉 treeHit가 10보다 작은 동안에 while문 안의 문장을 계속 수행한다. whlie문 안의 문장을 보면 제일 먼저 treeHit = treeHit + 1로 treeHit 값이 계속 1씩 증가한다. 그리고 나무를 treeHit번만큼 찍었음을 알리는 문장을 출력하고 treeHit가 10이 되면 "나무 넘어갑니다."라는 문장을 출력한다. 그러고 나면 treeHit &lt; 10 조건문이 거짓이 되므로 while문을 빠져나가게 된다.<ul>
+<li>결론 : while 조건문에서 조건문이 참이면 while안의 명령문을 계속 반복 수행하고 거짓이면 while에서 벗어나서 다음 줄로 넘어가게 된다.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>이번에는 여러 가지 선택지 중 하나를 선택해서 입력받는 예제를 만들어보자, 먼저 다음과 같이 여러 줄짜리 문자열을 만들어보자</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">1. Add</span>
+<span class="s2">2. Del</span>
+<span class="s2">3. List</span>
+<span class="s2">4. Quit</span>
+<span class="s2">Enter number: &quot;&quot;&quot;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>이어서 number 변수에 0을 먼저 대입한다. 이렇게 변수를 먼저 설정해 놓지 않으면 다음에 나올 while문의 조건문인 number != 4에서 변수가 존재하지 않는다는 오류가 발생한다.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">number</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+    <span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+1. Add
+2. Del
+3. List
+4. Quit
+Enter number: 
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+1. Add
+2. Del
+3. List
+4. Quit
+Enter number: 
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+1. Add
+2. Del
+3. List
+4. Quit
+Enter number: 
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>이런식으로 4를 입력하면 조건문이 거짓이 되어 while문을 빠져나가게 된다.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>while문에서 강제로 빠져나가보자</li>
+<li>while문은 조건문이 참인 동안 계속해서 while문 안의 내용을 반복적으로 수행한다. 하지만 강제로 while문을 빠져나가고 싶을 때가 있다. 예를 들어 커피 자판기를 생각해 보자. 자판기 안에 커피가 충분히 있을 때에는 동전을 넣으면 커피가 나온다. 그런데 자판기가 제대로 작동하려면 커피가 얼마나 남았는지 항상 검사해야 한다. 만약 커피가 떨어졌다면 판매를 중단하고 "판매 중지" 문구를 사용자에게 보여주어야 한다. 이렇게 판매를 강제로 멈추게 하는 것이 바로 break문이다.</li>
+<li><img src="data:image/png;base64,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" alt="image.png" /></li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">coffee</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">money</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="k">while</span> <span class="n">money</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;돈을 받았으니 커피를 줍니다.&quot;</span><span class="p">)</span>
+    <span class="n">coffee</span> <span class="o">=</span> <span class="n">coffee</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;남은 커피의 양은 </span><span class="si">%d</span><span class="s2"> 입니다.&quot;</span> <span class="o">%</span> <span class="n">coffee</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">coffee</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;커피가 다 떨어졌습니다. 판매를 중지합니다.&quot;</span><span class="p">)</span>
+        <span class="k">break</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>돈을 받았으니 커피를 줍니다.
+남은 커피의 양은 9 입니다.
+돈을 받았으니 커피를 줍니다.
+남은 커피의 양은 8 입니다.
+돈을 받았으니 커피를 줍니다.
+남은 커피의 양은 7 입니다.
+돈을 받았으니 커피를 줍니다.
+남은 커피의 양은 6 입니다.
+돈을 받았으니 커피를 줍니다.
+남은 커피의 양은 5 입니다.
+돈을 받았으니 커피를 줍니다.
+남은 커피의 양은 4 입니다.
+돈을 받았으니 커피를 줍니다.
+남은 커피의 양은 3 입니다.
+돈을 받았으니 커피를 줍니다.
+남은 커피의 양은 2 입니다.
+돈을 받았으니 커피를 줍니다.
+남은 커피의 양은 1 입니다.
+돈을 받았으니 커피를 줍니다.
+남은 커피의 양은 0 입니다.
+커피가 다 떨어졌습니다. 판매를 중지합니다.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">coffee</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">money</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="k">while</span> <span class="n">money</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;돈을 받았으니 커피를 줍니다.&quot;</span><span class="p">)</span>
+    <span class="n">coffee</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;남은 커피의 양은 </span><span class="si">%d</span><span class="s2"> 입니다.&quot;</span> <span class="o">%</span> <span class="n">coffee</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">coffee</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;커피가 다 떨어졌습니다. 판매를 중지합니다.&quot;</span><span class="p">)</span>
+        <span class="k">break</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>돈을 받았으니 커피를 줍니다.
+남은 커피의 양은 9 입니다.
+돈을 받았으니 커피를 줍니다.
+남은 커피의 양은 8 입니다.
+돈을 받았으니 커피를 줍니다.
+남은 커피의 양은 7 입니다.
+돈을 받았으니 커피를 줍니다.
+남은 커피의 양은 6 입니다.
+돈을 받았으니 커피를 줍니다.
+남은 커피의 양은 5 입니다.
+돈을 받았으니 커피를 줍니다.
+남은 커피의 양은 4 입니다.
+돈을 받았으니 커피를 줍니다.
+남은 커피의 양은 3 입니다.
+돈을 받았으니 커피를 줍니다.
+남은 커피의 양은 2 입니다.
+돈을 받았으니 커피를 줍니다.
+남은 커피의 양은 1 입니다.
+돈을 받았으니 커피를 줍니다.
+남은 커피의 양은 0 입니다.
+커피가 다 떨어졌습니다. 판매를 중지합니다.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>money가 300으로 고정되어 있으므로 while money:에서 조건문인 money는 0이 아니기 때문에 항상 참이다. 0일 땐 Fasle이며 그 외의 숫자에선 항상 True이다. 따라서 무한히 반복되는 무한 루프를 돌게 된다. 그리고 while문의 내용을 한 번 수행할 때마다 coffee = coffee - 1 혹은 coffee -= 1에 의해서 coffee의 개수가 1개씩 줄어든다. 만약 coffee가 0이 되면 if coffee == 0: 문장에서 coffee == 0:이 참이 되므로 if문 다음 문장 "커피가 다 떨어졌습니다. 판매를 중지합니다."가 수행되고 break문이 호출되어 while문을 빠져나가게 된다.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">coffee</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">money</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;돈을 넣어 주세요: &quot;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">money</span> <span class="o">==</span> <span class="mi">300</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;커피를 줍니다.&quot;</span><span class="p">)</span>
+        <span class="n">coffee</span> <span class="o">=</span> <span class="n">coffee</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;커피 이만큼 남음 =&gt; </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">coffee</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">money</span> <span class="o">&gt;</span> <span class="mi">300</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;거스름돈 </span><span class="si">%d</span><span class="s2">를 주고 커피를 줍니다.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">money</span> <span class="o">-</span><span class="mi">300</span><span class="p">))</span>
+        <span class="n">coffee</span> <span class="o">=</span> <span class="n">coffee</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;커피 이만큼 남음 =&gt; </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">coffee</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;돈을 다시 돌려주고 커피를 주지 않습니다.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;남은 커피의 양은 </span><span class="si">%d</span><span class="s2">개 입니다.&quot;</span> <span class="o">%</span> <span class="n">coffee</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">coffee</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;커피가 다 떨어졌습니다. 판매를 중지 합니다.&quot;</span><span class="p">)</span>
+        <span class="k">break</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>거스름돈 246를 주고 커피를 줍니다.
+커피 이만큼 남음 =&gt; 2
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>돈을 다시 돌려주고 커피를 주지 않습니다.
+남은 커피의 양은 2개 입니다.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>거스름돈 246를 주고 커피를 줍니다.
+커피 이만큼 남음 =&gt; 1
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>거스름돈 354를 주고 커피를 줍니다.
+커피 이만큼 남음 =&gt; 0
+커피가 다 떨어졌습니다. 판매를 중지 합니다.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>while문의 맨 처음으로 돌아가기<ul>
+<li>while문 안의 문장을 수행할 때, 입력 조건을 검사해서 조건에 맞지 않으면  while문을 빠져나간다. 그런데 프로그래밍을 하다 보면 while문을 빠져나가지 않고 while문의 맨 처음(조건문)으로 다시 돌아가게 만들고 싶은 경우가 생길 수 있다. 이때 사용하는 것이 바로 continue이다.</li>
+<li>1~10까지의 숫자중에서 홀수만 출력하는 것을 while문을 사용해서 작성한다고 해보자</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">a</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">:</span>
+    <span class="n">a</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">a</span><span class="o">%</span><span class="k">2</span> == 0 : continue # 다시 while문의 맨 처음인 조건문으로 돌아가게 된다.
+    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1
+3
+5
+7
+9
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>무한 루프<ul>
+<li>무한 루프란 무한히 반복한다는 의미이다. 우리가 사용하는 일반 프로그램 중에서 무한 루프 개념을 사용하지 않는 프로그램은 거의 없다. 그만큼 자주 사용하게 될 것이다. </li>
+<li>파이썬에서 무한 루프는 while문으로 구현할 수 있다. 다음은 무한 루프의 기본 형태이다. <div class="highlight"><pre><span></span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="n">수행할</span> <span class="n">문장1</span>
+<span class="n">수행할</span> <span class="n">문장2</span>
+</pre></div>
+</li>
+</ul>
+</li>
+<li>while문의 조건문이 True이므로 항상 참이 된다. 따라서 while문 안에 있는 문장 2개는 무한히 수행될 것이다. </li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><a class="u-url" href="/INTROpython/2022/02/03/intro2.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/INTROpython/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/INTROpython/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/INTROpython/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/rhkrehtjd" target="_blank" title="rhkrehtjd"><svg class="svg-icon grey"><use xlink:href="/INTROpython/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
