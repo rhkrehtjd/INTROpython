@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>데코레이터(@) | INTROpython</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="데코레이터(@)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
+<meta property="og:description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
+<link rel="canonical" href="https://rhkrehtjd.github.io/INTROpython/2022/02/09/intro.html" />
+<meta property="og:url" content="https://rhkrehtjd.github.io/INTROpython/2022/02/09/intro.html" />
+<meta property="og:site_name" content="INTROpython" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-02-09T00:00:00-06:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="데코레이터(@)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-02-09T00:00:00-06:00","datePublished":"2022-02-09T00:00:00-06:00","description":"An easy to use blogging platform with support for Jupyter Notebooks.","headline":"데코레이터(@)","mainEntityOfPage":{"@type":"WebPage","@id":"https://rhkrehtjd.github.io/INTROpython/2022/02/09/intro.html"},"url":"https://rhkrehtjd.github.io/INTROpython/2022/02/09/intro.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/INTROpython/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://rhkrehtjd.github.io/INTROpython/feed.xml" title="INTROpython" /><link rel="shortcut icon" type="image/x-icon" href="/INTROpython/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/INTROpython/">INTROpython</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/INTROpython/about/">About Me</a><a class="page-link" href="/INTROpython/search/">Search</a><a class="page-link" href="/INTROpython/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">데코레이터(@)</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-02-09T00:00:00-06:00" itemprop="datePublished">
+        Feb 9, 2022
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      3 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-justify-center">
+          <div class="px-2">
+
+    <a href="https://github.com/rhkrehtjd/INTROpython/tree/master/_notebooks/2022-02-09-intro.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/INTROpython/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/rhkrehtjd/INTROpython/master?filepath=_notebooks%2F2022-02-09-intro.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/INTROpython/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/rhkrehtjd/INTROpython/blob/master/_notebooks/2022-02-09-intro.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/INTROpython/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+          <div class="px-2">
+  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Frhkrehtjd%2FINTROpython%2Fblob%2Fmaster%2F_notebooks%2F2022-02-09-intro.ipynb" target="_blank">
+      <img class="notebook-badge-image" src="/INTROpython/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
+  </a>
+</div>
+
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2022-02-09-intro.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>ref-1) <a href="https://miruetoto.github.io/yechan/%ED%8C%8C%EC%9D%B4%EC%8D%AC/2022/02/03/(%EB%85%B8%ED%8A%B8">최규빈 교수님 깃허브</a>-%EB%8D%B0%EC%BD%94%EB%A0%88%EC%9D%B4%ED%84%B0-%ED%8C%8C%EC%9D%B4%EC%8D%AC.html)</p>
+<p>ref-2) <a href="https://dojang.io/mod/page/view.php?id=2427">코딩도장 참고 사이트</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>데코레이터는 함수를 장식한다고 할 수 있는데, 도대체 어디에 사용하는 것일까? 데코레이터는 함수를 수정하지 않은 상태에서 추가 기능을 구현할 때 사용한다. 예를 들어서 함수의 시작과 끝을 출력하고 싶다면 다음과 같이 함수 시작, 끝 부분에 print를 넣어주어야 한다.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hello 함수 시작&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hello 함수 끝&#39;</span><span class="p">)</span>
+    
+<span class="k">def</span> <span class="nf">world</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;world 함수 시작&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;world&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;world 함수 끝&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hello</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>hello 함수 시작
+hello
+hello 함수 끝
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">world</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>world 함수 시작
+world
+world 함수 끝
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>만약 다른 함수도 시작과 끝을 출력하고 싶다면 함수를 만들 때마다 print를 넣어햐 한다. 따라서 함수가 많아지면 매우 번거로워질 수 있다. 이런 경우에는 데코레이터를 활용하면 편리하다. </li>
+<li>다음은 함수의 시작과 끝을 출력하는 데코레이터이다.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">trace</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>                             <span class="c1"># 호출할 함수를 매개변수로 받음</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>                           <span class="c1"># 호출할 함수를 감싸는 함수</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s1">&#39;함수 시작&#39;</span><span class="p">)</span>    <span class="c1"># __name__으로 함수 이름 출력</span>
+        <span class="n">func</span><span class="p">()</span>                               <span class="c1"># 매개변수로 받은 함수를 호출</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s1">&#39;함수 끝&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapper</span>                           <span class="c1"># wrapper 함수 반환</span>
+ 
+<span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+    
+<span class="k">def</span> <span class="nf">world</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;world&#39;</span><span class="p">)</span>
+
+<span class="n">trace_hello</span> <span class="o">=</span> <span class="n">trace</span><span class="p">(</span><span class="n">hello</span><span class="p">)</span>    <span class="c1"># 데코레이터에 호출할 함수를 넣음</span>
+<span class="n">trace_hello</span><span class="p">()</span>                 <span class="c1"># 반환된 함수를 호출</span>
+<span class="n">trace_world</span> <span class="o">=</span> <span class="n">trace</span><span class="p">(</span><span class="n">world</span><span class="p">)</span>    <span class="c1"># 데코레이터에 호출할 함수를 넣음</span>
+<span class="n">trace_world</span><span class="p">()</span>                 <span class="c1"># 반환된 함수를 호출</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>hello 함수 시작
+hello
+hello 함수 끝
+world 함수 시작
+world
+world 함수 끝
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">trace_hello</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>function</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">trace</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>                             
+        <span class="nb">print</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s1">&#39;함수 시작&#39;</span><span class="p">)</span>    
+        <span class="n">func</span><span class="p">()</span>                               
+        <span class="nb">print</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s1">&#39;함수 끝&#39;</span><span class="p">)</span>
+</pre></div>
+<ul>
+<li>이렇게 해줘도 된다고 생각했는데 하면 안 되는 이유가 데코레이터의 사용이유 자체가 함수를 장식하는 것, 함수를 수정하지 않은 상태에서 추가 기능을 구현한 함수를 만들고 싶은 것이다. </li>
+<li>그런데 이렇게 수행해주면 trace(hello)수행시에 반환되는 객체는 바로 위 셀처럼 function이 아니게 됨</li>
+<li>따라서 감싸는 함수를 만들어준다음에 return으로 함수 객체를 내보내줘야함</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>먼저 데코레이터 trace는 호출할 함수를 매개변수로 받는다.</li>
+<li>즉 함수 안에서 함수를 만들고 반환하는 클로저이다.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>데코레이터를 사용할 때는 trace에 호출할 함수 hello 또는 world를 넣습니다. 그 다음에 데코레이터에서 반환된 함수를 호출한다. 이렇게하면 데코레이터에서 반환된 함수를 호출한다. 이렇게 하면 데코레이터에 인수로 넣은 함수를 호출하고 시작화 끝을 출력한다.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>물론 trace에 다른 함수를 넣은 뒤 반환된 함수를 호출하면 해당 함수의 시작과 끝을 출력할 수 있다.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>@로 데코레이터 사용하기<ul>
+<li>이제 @을 사용하여 좀 더 간편하게 데코레이터를 사용해보자</li>
+<li>다음과 같이 호출할 함수 위에 @데코레이터 형식으로 지정한다.<div class="highlight"><pre><span></span><span class="nd">@데코레이터</span>
+<span class="k">def</span> <span class="nf">함수이름</span><span class="p">():</span>
+<span class="n">코드</span>
+</pre></div>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">trace</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>                             <span class="c1"># 호출할 함수를 매개변수로 받음</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s1">&#39;함수 시작&#39;</span><span class="p">)</span>    <span class="c1"># __name__으로 함수 이름 출력</span>
+        <span class="n">func</span><span class="p">()</span>                               <span class="c1"># 매개변수로 받은 함수를 호출</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s1">&#39;함수 끝&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapper</span>                           <span class="c1"># wrapper 함수 반환</span>
+ 
+<span class="nd">@trace</span>    <span class="c1"># @데코레이터</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+    
+<span class="nd">@trace</span>    <span class="c1"># @데코레이터</span>
+<span class="k">def</span> <span class="nf">world</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;world&#39;</span><span class="p">)</span>
+
+<span class="n">hello</span><span class="p">()</span>    <span class="c1"># 함수를 그대로 호출</span>
+<span class="n">world</span><span class="p">()</span>    <span class="c1"># 함수를 그대로 호출</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>hello 함수 시작
+hello
+hello 함수 끝
+world 함수 시작
+world
+world 함수 끝
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>hello와 world 함수 위에 @trace를 붙인 뒤에 hello와 world 함수를 그대로 호출하면 끝이다</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>물론 다른 함수 위에 @trace를 붙인 뒤 함수를 호출하면 해당 함수의 시작과 끝을 출력할 수 있다.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>이 데코레이터를 그림으로 표현하면 다음과 같은 모양이 될 수 있다.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><img src="data:image/png;base64,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CCGEECJpkHARQhQovMF369attmDBAtu2bVvaWiGESIzeDi2EyDGYD5b9+/f792LFivl3xAifU1JSrGTJkrZv3z5fF/YvVaqUlShRwj/v3bvXFi5caG+99ZZdcskl1rRpUz/m4MGDfky5cuU8bdI4dOiQpaam+nF8ZjvphM+ck2PJD9+LF/+qb8Z+nDc9OIaldOnSnh5wzO7du/2cpHXgwAH/G8rBwjnDecJxQNk5H+XgOLaFY0NeOJb0Q175DmynHKwPZWEbx4a8kB7pch6I5pkl5EmIooaEixAix+BQ9+zZYxMmTHAHXbVqVZs3b5599tln7lDPPPNMO+OMM2z06NH20UcfeWQFh3rjjTda69atXYxMmjTJlixZ4mn07t3batWqZZ07d7bx48fb559/bg899JCfi/3uv/9+e+CBB9x5z54927Zv326tWrWyMWPG2OLFi10MDB482EXQli1b3NHj0BE/V199tXXs2NHTSgR5vuuuu+zee++1FStWeD7bt29vP/rRj+yWW26xxo0b29SpUz0txM3HH39sX3zxhZUvX97OPfdcmzt3rucXyN+gQYOse/futnTpUnv44YetYcOGXk7KfM4559h5553nx/7qV7/ydQgU6ox1lKFFixa2YcMGGzZsmM2fP9+31atXz66//nrPA2Jv0aJF1qxZM1u/fr3XMemceuqpdsEFF3g6QhRFUv4QI+2zEELkCJzuCy+84I62b9++Llh69epldevWtY0bN9rTTz/t0RScdY0aNezZZ5+1Dh06uNDB2RI52Lx5s7Vr184aNWpkNWvWdMe8du1aO//88/0ciImxY8faRRddZBUqVLAvv/zSnn/+ed+Gsw7nxLkjkhAut912m5122mkuGBAQXbt2dQEQIhtRGKaaMmWKdevWzV588UUXYJ06dbJ3333XTj/9dBdUu3btcuFUsWJFFyv9+vWzU045xWrXru157t+/v4svBN3IkSP9O2Jt3LhxLqBuv/1269Gjh+ePqAhiaMSIEbZp0ybPKyKPMi9btszrjvLVqVPHrrzySs876ZAPzoVgDKKP81Mvffr0sTZt2liZMmWORWKEKGooliiEyDEIAIY0iEzwFwfctm1bFw8sRCZw0jhSogQ40yZNmtjq1atdiJQtW9bFAQtOvEuXLtazZ08/luhJ/HBHEB2kx/6ck30QOw0aNPDjOA/CgUgM56pfv76vR1QhktILMpMXBAECh+Eb9kVAELlgQawQsaGMiArOH9LmnJUrV3bRgaDiXJRxx44dnjb1cOGFF/oxzZs3d/GBCAHyT/lZT3qIL9Lh+IkTJ/oxQYSQP6I+CD3Ky/c1a9Z4nRPRYUEMZjQkJkSyI+EihMg1RBNwrjh0nHQQHEQF5syZ41GBxx9/3P72t7/5sAnrw5wMCEM68URFBumyBBAnRC2ISMRHF/genecRBA/HpAfCBfHwySef+L6IAqIuRIjYBgyH8RkRExUHiIz77rvPh3UYcuI70ZlQJtKoUqWKp0u++IzA4Tt5rF69uosxYBvnQLww/PXEE0/Y3//+d6+3GTNmuCgiwgWkj1hhaEqIEwUJFyFErsEBIyqC8w3gpKtVq+bDPb/73e98DsmQIUNs+PDhPswSJYiMAGIjOGggCrJz5860b0e347Bx8vHHEolBZAT4Th4zgrSYL4JgQIDxfdWqVcfEGHBOzkd6UUaNGuVDYr/4xS98WIeoCVEYQCyR9xB9AfIW8kfeoyKHycosCCOEFGlSb/fcc48NHTrUfv/737sQAvLIeahnIU4UJFyEEHkC0ZH4YRiEDBNtp02b5o47OFqEQNTZ8hlHzhBIgCEP5r0w94R5IjNnzvRhmiiIgkRDP/HrEu0TD2KEoRrOw2eiIEzAZZIs+Yb0xA+TYytVquT7IUBmzZp1TGRxDGJo8uTJLsTYl2Ey5rMAeWNiL0M+fGZuD8fwdBVzV1jPcQgmxAxLqDv2zyiKJERRRMJFCJErcJwMjeCoESc8AYOjxakiUJiz0rJlS59YyzAKTwPxBFGIpuCkGXqB5cuX+3acO46beRzMBeE4HDpignQROQyZcD4cO5GRaHQGARHSBJw9Iio+MhMFMUB+mduCgGEIijKRB4QMUZCVK1f6+Tkn4iMIJybksh2hw1ATQou5L0D5EB2UYfr06b4diMoEEGjMXWEbk3V5GolIz1VXXeVPSLGN4xE/pI04Im/UE5OQqTeesJKIEScCeqpICJEriJIwFwTnjDjAkYbfYmFoBdHApFYcLfsxtwMBwhwShAKOnSgMTwoxFwYRguhg2IYndj799FN3yjwdxFMzQRAgIjgGJ04aIT0gL0zYZUiFbeQFAYIYQKCwLh7WkVfSQThwHspB3kmPPCAeSAeRhEhg4izHkS4TgXkcGlHFU0hEmpiEyzARwuLiiy/2OSvkd8CAAZ42IMx4NByhxI/w8XQQTzYxIZh9WM/xCCWGlDgnwozoE8NT1B1ii7kxRH0yEmdCFAX0Oy5CiFyBA8eR45AxJzhyBAQOlM+sC/vg1FmHkEBAIGwCbEcEsX8YDuE4IhkcQ3rsH45h3zC0RHpBKAFpcUwYUmE/vrOdvyyJCOcjLeA4RALnpnx85y+QdhhCIs+UjfOyb8gr8JQSjzUPHDjQn/5hW8gvx/361792MXLttdd62qRJ2uwHiBLSZl8Idcu+4SkpzkV6HJde2YQoKki4CCFEPoF5ZY4Oj1UTqSHSFIXtDB/xKDUTcUHCQ4iMkXARQgghRNKgwVAhhBBCJA0SLkIIIYRIGiRchBBCCJE0SLgIIYQQImmQcBFCCCFE0iDhIoQQQoikQcJFCCGEEEmDhIsQQgghkgYJFyGEEEIkDRIuQgghhEgaJFyEEEIIkTRIuAghhBAiaZBwEUIIIUTSIOEihBBCiKRBwkUIIYQQSYOEixBCCCGSBgkXIYQQQiQNEi5CCCGESBokXIQQQgiRNEi4CCGEECJJMPt/d57YZWLmeHQAAAAASUVORK5CYII=" alt="image.png" /></li>
+<li>ref) <a href="https://dojang.io/mod/page/view.php?id=2427">파이썬 코딩 도장</a></li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>이렇게 데코레이터는 함수를 감싸는 형태로 구성되어 있다. 따라서 데코레이터는 기존 함수를 수정하지 않으면서 추가 기능을 구현할 때 사용한다.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>데코레이터 여러 개 지정하기<ul>
+<li>함수에는 데코레이터를 여러 개 지정할 수 있다. 다음과 같이 함수 위에 데코레이터를 여러 줄로 지정해준다. 이때 데코레이터가 실행되는 순서는 위에서 아래 순이다.<div class="highlight"><pre><span></span><span class="nd">@데코레이터1</span>
+<span class="nd">@데코레이터2</span>
+<span class="k">def</span> <span class="nf">함수이름</span><span class="p">():</span>
+<span class="n">코드</span>
+</pre></div>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">decorator1</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;decorator1&#39;</span><span class="p">)</span>
+        <span class="n">func</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+ 
+<span class="k">def</span> <span class="nf">decorator2</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;decorator2&#39;</span><span class="p">)</span>
+        <span class="n">func</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+ 
+<span class="c1"># 데코레이터를 여러 개 지정</span>
+<span class="nd">@decorator1</span>
+<span class="nd">@decorator2</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+
+<span class="n">hello</span><span class="p">()</span>
+<span class="c1"># 데코레이터가 두개 얹어져있을 땐,</span>
+<span class="c1"># 아래에서부터 위로 적용해가며 올라간다고 생각하면 될 것같다</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>decorator1
+decorator2
+hello
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>ref) <a href="github.com/guebin">최규빈 교수님 깃허브</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>아래와 같은 함수를 정의해야 하는 상황을 생각하자. </li>
+</ul>
+<div class="highlight"><pre><span></span><span class="c1"># step1</span>
+<span class="k">def</span> <span class="nf">deco</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="err">??</span>
+
+<span class="c1"># step2 </span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="err">??</span><span class="p">):</span>
+    <span class="err">??</span>
+
+<span class="c1"># step3</span>
+<span class="n">f</span><span class="o">=</span><span class="n">deco</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>이럴때는 아래와 같이 편리하게 정의할 수 있다. </li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="c1"># step1 </span>
+<span class="k">def</span> <span class="nf">deco</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="err">??</span>
+
+<span class="c1"># step2 </span>
+<span class="nd">@deco</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="err">?</span><span class="p">):</span>
+    <span class="err">??</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="&#50696;&#51228;1:-&#54632;&#49688;&#47484;-&#49352;&#47213;&#44172;-&#51221;&#51032;&#54624;&#46412;-&#51473;&#50836;&#54620;-&#54632;&#49688;&#45716;-&#46384;&#47196;-list&#47196;-&#47564;&#46308;&#50612;-&#51200;&#51109;&#54644;&#48372;&#51088;.">&#50696;&#51228;1: &#54632;&#49688;&#47484; &#49352;&#47213;&#44172; &#51221;&#51032;&#54624;&#46412; <code>&#51473;&#50836;&#54620; &#54632;&#49688;&#45716; &#46384;&#47196; list&#47196; &#47564;&#46308;&#50612; &#51200;&#51109;</code>&#54644;&#48372;&#51088;.<a class="anchor-link" href="#&#50696;&#51228;1:-&#54632;&#49688;&#47484;-&#49352;&#47213;&#44172;-&#51221;&#51032;&#54624;&#46412;-&#51473;&#50836;&#54620;-&#54632;&#49688;&#45716;-&#46384;&#47196;-list&#47196;-&#47564;&#46308;&#50612;-&#51200;&#51109;&#54644;&#48372;&#51088;."> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>-</code> <code>중요한 함수는 따로 list로 만들어 저장</code> 하는 함수를 구현하자. (이게 deco함수이다)</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lst</span><span class="o">=</span><span class="p">[]</span> 
+<span class="k">def</span> <span class="nf">m</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">f</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>-</code></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@m</span>
+<span class="k">def</span> <span class="nf">myadd</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">myadd</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>3</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lst</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&lt;function __main__.myadd(x, y)&gt;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@m</span>
+<span class="k">def</span> <span class="nf">mymul</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lst</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&lt;function __main__.myadd(x, y)&gt;, &lt;function __main__.mymul(x, y)&gt;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@m</span>
+<span class="k">def</span> <span class="nf">_mysq</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lst</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&lt;function __main__.myadd(x, y)&gt;,
+ &lt;function __main__.mymul(x, y)&gt;,
+ &lt;function __main__._mysq(x)&gt;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># 이런 식으로 활용?,,,</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>3</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><a class="u-url" href="/INTROpython/2022/02/09/intro.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/INTROpython/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/INTROpython/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/INTROpython/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/rhkrehtjd" target="_blank" title="rhkrehtjd"><svg class="svg-icon grey"><use xlink:href="/INTROpython/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
